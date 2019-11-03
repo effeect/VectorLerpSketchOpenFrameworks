@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "CircleClass.h"
 
 class ofApp : public ofBaseApp{
 
@@ -25,6 +26,7 @@ class ofApp : public ofBaseApp{
 		ofVec2f tweenFrames(float startX, float startY, float endX, float endY, float frame);
 		float amount;
 
+		std::vector<CircleClass> Circles;
 		
 
 

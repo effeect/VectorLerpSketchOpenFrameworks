@@ -2,7 +2,14 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	
+	CircleClass c(100, 200, 200, 100, amount);
+	CircleClass d(200, 100, 300, 200, amount);
+	CircleClass e(300, 200, 100, 200, amount);
+
+	Circles.push_back(c);
+	Circles.push_back(d);
+	Circles.push_back(e);
+
 }
 
 //--------------------------------------------------------------
@@ -12,23 +19,29 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofBackground(255);
+	//ofPixels.begin();
 	
-	ofVec2f version1 = tweenFrames(100, 200, 200, 100, 0);
-	ofVec2f version2 = tweenFrames(200, 100, 300, 200, 0);
-	ofVec2f version3 = tweenFrames(100, 200, 100, 200, 0);
+	ofBackground(255);
+
+	
+	for (int i = 0; i < Circles.size(); i++)
+	{
+		Circles[i].amount = amount;
+
+		ofSetColor(0);
+		ofCircle(Circles[i].result().x, Circles[i].result().y, 10);
+		
+		std::cout << Circles[i].result().x << std::endl;
+
+	}
 
 	if (amount > 1)
 	{
 		amount = 0;
+
 	}
 
-	amount += 0.1;
-
-	ofSetColor(255, 255, 0);
-	ofCircle(version1.x, version1.y, 10);
-	ofCircle(version2.x, version2.y, 10);
-	ofCircle(version3.x, version3.y, 10);
+	amount += 0.01;
 
 }
 
@@ -54,7 +67,10 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+	CircleClass newEntry(mouseX,
+		mouseY,
+		Circles.back().startVector.x, Circles.back().startVector.y, amount);
+	Circles.push_back(newEntry);
 }
 
 //--------------------------------------------------------------
