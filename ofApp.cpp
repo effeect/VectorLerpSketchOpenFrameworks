@@ -2,13 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	CircleClass c(100, 200, 200, 100, amount);
-	CircleClass d(200, 100, 300, 200, amount);
-	CircleClass e(300, 200, 100, 200, amount);
 
-	Circles.push_back(c);
-	Circles.push_back(d);
-	Circles.push_back(e);
+	//Declaring 3 intial pointers
+	Circles.push_back(new CircleClass(100, 200, 200, 100, amount));
+	Circles.push_back(new CircleClass(200, 100, 300, 200, amount));
+	Circles.push_back(new CircleClass(300, 200, 100, 200, amount));
 
 }
 
@@ -23,16 +21,12 @@ void ofApp::draw(){
 	
 	ofBackground(255);
 
-	
-	for (int i = 0; i < Circles.size(); i++)
+	for (auto &a: Circles)
 	{
-		Circles[i].amount = amount;
+		a->amount = amount;
 
 		ofSetColor(0);
-		ofCircle(Circles[i].result().x, Circles[i].result().y, 10);
-		
-		std::cout << Circles[i].result().x << std::endl;
-
+		ofCircle(a->result().x, a->result().y, 10);
 	}
 
 	if (amount > 1)
@@ -67,10 +61,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	CircleClass newEntry(mouseX,
-		mouseY,
-		Circles.back().startVector.x, Circles.back().startVector.y, amount);
-	Circles.push_back(newEntry);
+	Circles.push_back(new CircleClass(mouseX,mouseY,150,150,amount));
 }
 
 //--------------------------------------------------------------

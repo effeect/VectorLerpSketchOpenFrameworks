@@ -26,7 +26,7 @@ class ofApp : public ofBaseApp{
 		ofVec2f tweenFrames(float startX, float startY, float endX, float endY, float frame);
 		float amount;
 
-		std::vector<CircleClass> Circles;
+		std::vector<CircleClass*> Circles;
 		
 
 
